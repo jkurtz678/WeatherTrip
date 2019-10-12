@@ -1,15 +1,27 @@
 import React from "react";
 
 class SearchBar extends React.Component {
-	state = { term: "" };
+	state = { start: "", end: "" };
 
-	onInputChange = event => {
-		this.setState({ term: event.target.value });
+	onStartChange = event => {
+		this.setState({ start: event.target.value });
+	};
+
+	onEndChange = event => {
+		this.setState({ end: event.target.value });
 	};
 
 	onFormSubmit = event => {
 		event.preventDefault();
-		this.props.onFormSubmit(this.state.term);
+		/*const search = this.state.start + ":" + this.state.end;
+		console.log("Search term:", search);
+		if( search.includes(' ')) {
+			console.log("invalid search!")
+		} else {
+			this.props.onFormSubmit(search);
+		}*/
+		this.props.onFormSubmit(this.state.start, this.state.end);
+		//this.props.onFormSubmit();
 	};
 
 	render() {
@@ -17,12 +29,19 @@ class SearchBar extends React.Component {
 			<div>
 				<form onSubmit={this.onFormSubmit}>
 					<div>
-						<label>LatLong:</label>
+						<label>Start:</label>
 						<input
 							type="text"
-							value={this.state.term}
-							onChange={this.onInputChange}
+							value={this.state.start}
+							onChange={this.onStartChange}
 						/>
+						<label>Destination:</label>
+						<input
+							type="text"
+							value={this.state.end}
+							onChange={this.onEndChange}
+						/>
+						<input type="submit" value="search"/>
 					</div>
 				</form>
 			</div>
