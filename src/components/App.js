@@ -1,5 +1,5 @@
 import React from "react";
-import './App.css';
+import "./App.css";
 import axios from "axios";
 import SearchForm from "./SearchForm";
 import LocationContainer from "./LocationContainer";
@@ -42,22 +42,24 @@ class App extends React.Component {
 	};
 
 	onClickTwo = async () => {
-		const response = await axios.get("/test/barstow");
+		const response = await axios.get("/test/cities");
 		console.log(response);
-		//this.setState({ routePoints: response.data });
+		this.setState({ routePoints: response.data });
 		//console.log(this.routePoints);
 	};
 
 	render() {
 		return (
 			<div className="app-container">
-				<div>
+				<div className="title-container">
 					<h1>WeatherTrip</h1>
 					<h3>Weather conditions for the road ahead</h3>
 					<SearchForm onFormSubmit={this.onSearchSubmit} />
+					<button onClick={this.onClickTwo}>/test/cities</button>
 				</div>
-				{/*<button onClick={this.onClickTwo}>/test/cities</button>}*/}
-				<LocationContainer locations={this.state.routePoints} />
+				<div className="route-container">
+					<LocationContainer locations={this.state.routePoints} />
+				</div>
 			</div>
 		);
 	}

@@ -1,4 +1,5 @@
 import React from "react";
+import './SearchForm.css';
 
 class SearchBar extends React.Component {
 	state = { start: "", end: "" };
@@ -26,7 +27,8 @@ class SearchBar extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="search-container">
+			<h3>Enter your trip:</h3>
 				<form onSubmit={this.onFormSubmit}>
 					<div>
 						<label>Start:</label>
@@ -34,7 +36,7 @@ class SearchBar extends React.Component {
 							type="text"
 							value={this.state.start}
 							onChange={this.onStartChange}
-						/>
+						/><br/>
 						<label>Destination:</label>
 						<input
 							type="text"

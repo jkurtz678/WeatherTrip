@@ -1,15 +1,64 @@
 .row-container {
 	width: 200px;
-	text-align: center;
+	height: 110px;
+	position: relative;
+	//background-color: green;
+	margin: 20px auto;
 }
 
 .node {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	margin: 20px auto;
-	height: 90px;
-	width: 150px;
+	position: absolute;
+	box-sizing: border-box;
+	height: 120px;
+	width: 180px;
+	left: 50%;
+	margin-left: -90px;
+	top: 50%;
+	margin-top: -60px;
 	background-color: cyan;
-	border-radius: 75px / 45px;
+	border-radius: 90px / 60px;
+	border-style: solid;
+	border-width: 5px;
+	border-color: gray;
+}
+
+.time-node {
+	position: absolute;
+	height: 70px;
+	box-sizing: border-box;
+	width: 130px;
+	left: 85%;
+	top: 50%;
+	margin-top: -35px;
+	border-radius: 65px / 35px;
+	background-color: green;
+	border-style: solid;
+	border-width: 5px;
+	border-color: gray;
+}
+
+.node-container {
+	text-align: center;
+	padding-top: 25px;
+}
+.time-container {
+	text-align: center;
+	padding-top:13px;
+}
+
+.distance-label {
+	position: absolute;
+	line-height: 40px;
+	top: 50%;
+	margin-top: -20px;
+	left: -65px;
+}
+
+br {
+	line-height: 0%;
+	margin: 0px;
+}
+
+.node-item {
+	margin: 0px;
 }
