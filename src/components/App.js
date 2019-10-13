@@ -1,8 +1,28 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import axios from "axios";
 import SearchForm from "./SearchForm";
 import LocationContainer from "./LocationContainer";
+import YouTube from 'react-youtube';
+
+function _onReady(event) {
+  // access to player in all event handlers via event.target
+  // event.target.mute();
+  //console.log("asdfasdf");
+}
+
+function _onEnd(event) {
+  event.target.playVideo();
+}
+
+const videoOptions = {
+    playerVars: { // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+      controls: 0,
+      rel: 0,
+      showinfo: 0
+    	}
+  	};
 
 class App extends React.Component {
 	state = { routePoints: [] };
@@ -48,14 +68,27 @@ class App extends React.Component {
 		//console.log(this.routePoints);
 	};
 
+	
+
 	render() {
 		return (
 			<div className="app-container">
+				<div className="video-background">
+					<div className="video-foreground">
+						<YouTube
+							videoId="NIIQsm3T2VE"
+							opts={videoOptions}
+							className="video-iframe"
+							onReady={this._onReady}
+							onEnd={e=>e.target.playVideo()}
+						/>
+					</div>
+				</div>
 				<div className="title-container">
-					<h1>WeatherTrip</h1>
+					<h1 >WeatherTrip</h1>
 					<h3>Weather conditions for the road ahead</h3>
 					<SearchForm onFormSubmit={this.onSearchSubmit} />
-					<button onClick={this.onClickTwo}>/test/cities</button>
+					<button onClick={this.onClickTwo}>Test</button>
 				</div>
 				<div className="route-container">
 					<LocationContainer locations={this.state.routePoints} />

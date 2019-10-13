@@ -1,5 +1,5 @@
 import React from "react";
-import "./Location.css";
+import "./Location.scss";
 
 const Location = location => {
 	console.log(location.location);
@@ -13,7 +13,7 @@ const Location = location => {
 							", " +
 							location.location.state}
 					</h4>
-					<h1 className="node-item">77°</h1>
+					<h2 className="node-item">77°</h2>
 					<h4 className="node-item">Sunny</h4>
 				</div>
 			</div>
