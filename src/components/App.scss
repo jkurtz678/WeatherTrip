@@ -1,33 +1,54 @@
 html {
-	color: white;
-	font-family: 'Nunito Sans', sans-serif;
-	background-color: gray;
-	font-size: 10px;
+    color: white;
+    font-family: "Lato", sans-serif;
+    background-color: gray;
+    font-size: 10px;
 }
 
 h1 {
-	font-size:6em;
-	margin: 0px 0px;
+    font-size: 6em;
+    margin: 0px 0px;
 }
 
 h3 {
-	font-size: 1.7em;
+    font-size: 1.7em;
 }
 
 .app-container {
-	display: flex;
+    display: flex;
 }
 
 .title-container {
-	padding: 80px 0px 0px 80px;
-	width: 50%;
+    padding: 80px 0px 0px 80px;
+    width: 50%;
+}
+.loader {
 }
 
-.route-container{
-	padding-right: 80px;
-	display: flex;
-	justify-content: center;
-	width: 50%;
+.hidden {
+    display: none;
+}
+
+.error {
+    margin-top: 40px;
+    font-size: 1.7em;
+}
+
+.route-container {
+    padding-right: 80px;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+.footer {
+    font-size: 1.3em;
+    width: 75%;
+    position: fixed;
+    margin-left: -37.5%;
+    bottom: 20px;
+    left: 50%;
+    text-align: center;
 }
 
 .video-background {
@@ -40,14 +61,14 @@ h3 {
     z-index: -99;
     &::after {
         display: block;
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         z-index: 1;
-        background: rgba(0,0,0,0)
+        background: rgba(0, 0, 0, 0);
     }
 }
 .video-foreground,
@@ -61,8 +82,14 @@ h3 {
 }
 
 @media (min-aspect-ratio: 16/9) {
-    .video-foreground { height: 300%; top: -100%; }
+    .video-foreground {
+        height: 300%;
+        top: -100%;
+    }
 }
 @media (max-aspect-ratio: 16/9) {
-    .video-foreground { width: 300%; left: -100%; }
+    .video-foreground {
+        width: 300%;
+        left: -100%;
+    }
 }

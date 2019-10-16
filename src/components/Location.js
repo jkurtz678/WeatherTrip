@@ -13,8 +13,8 @@ const Location = location => {
 							", " +
 							location.location.state}
 					</h4>
-					<h2 className="node-item">77°</h2>
-					<h4 className="node-item">Sunny</h4>
+					<h2 className="node-item">{location.location.temp}°</h2>
+					<h4 className="node-item">{location.location.summary}</h4>
 				</div>
 			</div>
 			<div className="time-node">

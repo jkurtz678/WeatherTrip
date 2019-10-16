@@ -37,15 +37,19 @@ class SearchBar extends React.Component {
 						</div>
 						<div>
 							<input
+								className="location-search"
 								type="text"
 								value={this.state.start}
 								onChange={this.onStartChange}
+								placeholder="city, state"
 							/>
 							<br />
 							<input
+								className="location-search"
 								type="text"
 								value={this.state.end}
 								onChange={this.onEndChange}
+								placeholder="city, state"
 							/>
 						</div>
 					</div>

@@ -3,9 +3,22 @@ import "./App.scss";
 import axios from "axios";
 import SearchForm from "./SearchForm";
 import LocationContainer from "./LocationContainer";
+import posed from "react-pose";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
+
+const ErrorMessage = posed.div({
+	visible: { opacity: 1 },
+	hidden: { opacity: 0 }
+});
 
 class App extends React.Component {
-	state = { routePoints: [], showLocations: false };
+	state = {
+		routePoints: [],
+		showLocations: false,
+		showError: false,
+		loading: false
+	};
 
 	getTrip = async geoPair => {
 		const cityResponse = await axios.get("/trip/" + geoPair);
@@ -18,32 +31,48 @@ class App extends React.Component {
 	};
 
 	onSearchSubmit = async (start, end) => {
+		console.log("sending location request...");
+		this.startBackground();
+		this.setState({
+			showLocations: false,
+			showError: false,
+			loading: true
+		});
 		//const path = "/location/" + start;
 		//console.log(path);
 		//console.log("end:", end);
-		const response = await axios.all([
-			axios.get(/location/ + start),
-			axios.get(/location/ + end)
-		]);
-		console.log(response);
-		const geoPair =
-			response[0].data.lat +
-			"," +
-			response[0].data.lon +
-			":" +
-			response[1].data.lat +
-			"," +
-			response[1].data.lon;
+		try {
+			const response = await axios.all([
+				axios.get(/location/ + start),
+				axios.get(/location/ + end)
+			]);
 
-		const cityResponse = await axios.get("/trip/" + geoPair);
-		console.log(cityResponse);
+			console.log("REACT: location response:", response);
+			const geoPair =
+				response[0].data.lat +
+				"," +
+				response[0].data.lon +
+				":" +
+				response[1].data.lat +
+				"," +
+				response[1].data.lon;
 
-		//console.log(geoPair);
-		//this.getTrip(geoPair)
-		//this.setState({ routePoints: response.data.items });
-		//console.log(this.routePoints);
-		this.setState({ routePoints: cityResponse.data, showLocations: true });
-		this.startBackground();
+			const cityResponse = await axios.get("/trip/" + geoPair);
+			console.log(cityResponse);
+			this.setState({
+				routePoints: cityResponse.data,
+				showLocations: true,
+				showError: false,
+				loading: false
+			});
+		} catch {
+			console.log("REACT ERROR");
+			this.setState({
+				showError: true,
+				showLocations: false,
+				loading: false
+			});
+		}
 	};
 
 	onClickTwo = async () => {
@@ -70,12 +99,39 @@ class App extends React.Component {
 					<h3>Weather conditions for the road ahead</h3>
 					<SearchForm onFormSubmit={this.onSearchSubmit} />
 					<button onClick={this.onClickTwo}>Test</button>
+					<ErrorMessage
+						className="error"
+						pose={this.state.showError ? "visible" : "hidden"}
+					>
+						Invalid route locations!
+					</ErrorMessage>
+					<div className={this.state.loading ? "" : "hidden"}>
+						<Loader
+							type="Puff"
+							color="#00BFFF"
+							height={100}
+							width={100}
+						/>
+						<h3>Building route</h3>
+						<h3>Should take 8-15 seconds</h3>
+					</div>
 				</div>
 				<div className="route-container">
 					<LocationContainer
 						locations={this.state.routePoints}
 						isVisible={this.state.showLocations}
 					/>
+				</div>
+				<div className="footer">
+					© Jackson Kurtz. All rights reserved. Powered by
+					<a href="https://developer.tomtom.com" target="_blank">
+						TomTom
+					</a>{" "}
+					and
+					<a href="https://developer.tomtom.com" target="_blank">
+						{" "}
+						Darksky
+					</a>
 				</div>
 			</div>
 		);
