@@ -11,8 +11,15 @@ const FadeDiv = posed.div({
 class LocationContainer extends React.Component {
 	render() {
 		console.log("show location prop:", this.props.isVisible);
-		const locationList = this.props.locations.map(location => {
-			return <Location key={location.city} location={location} />;
+		const locationList = this.props.locations.map((location,index) => {
+			let nodeType = "stop";
+			if (index === 0 ) {
+				nodeType = "start";
+			}
+			else if(index === 4) {
+				nodeType = "end";
+			}
+			return <Location key={location.city} location={location} nodeType={nodeType} />;
 		});
 		return (
 			<FadeDiv
