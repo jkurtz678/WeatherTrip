@@ -85,7 +85,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div className="app-container">
+			<div className="page-container">
 				<div className="video-background">
 					<div className="video-foreground">
 						<video ref="bgVid" className="video-iframe">
@@ -94,44 +94,48 @@ class App extends React.Component {
 						</video>
 					</div>
 				</div>
-				<div className="title-container">
-					<h1>WeatherTrip</h1>
-					<h3>Weather conditions for the road ahead</h3>
-					<SearchForm onFormSubmit={this.onSearchSubmit} />
-					<button onClick={this.onClickTwo}>Test</button>
-					<ErrorMessage
-						className="error"
-						pose={this.state.showError ? "visible" : "hidden"}
-					>
-						Invalid route locations!
-					</ErrorMessage>
-					<div className={this.state.loading ? "" : "hidden"}>
-						<Loader
-							type="Puff"
-							color="#00BFFF"
-							height={100}
-							width={100}
-						/>
-						<h3>Building route</h3>
-						<h3>Should take 8-15 seconds</h3>
+				<div className="app-container">
+					<div className="left-container">
+						<div className="title-container">
+							<h1>WeatherTrip</h1>
+							<h3>Weather conditions for the road ahead</h3>
+						</div>
+						<SearchForm onFormSubmit={this.onSearchSubmit} />
+						{/*<button onClick={this.onClickTwo}>Test</button>*/}
+						<ErrorMessage
+							className="error"
+							pose={this.state.showError ? "visible" : "hidden"}
+						>
+							Invalid route locations!
+						</ErrorMessage>
+						<div className={this.state.loading ? "" : "hidden"}>
+							<Loader
+								type="Puff"
+								color="#00BFFF"
+								height={100}
+								width={100}
+							/>
+							<h3>Building route</h3>
+							<h3>Should take 8-15 seconds</h3>
+						</div>
 					</div>
-				</div>
-				<div className="route-container">
-					<LocationContainer
-						locations={this.state.routePoints}
-						isVisible={this.state.showLocations}
-					/>
-				</div>
-				<div className="footer">
-					© Jackson Kurtz. All rights reserved. Powered by
-					<a href="https://developer.tomtom.com" target="_blank">
-						TomTom
-					</a>{" "}
-					and
-					<a href="https://developer.tomtom.com" target="_blank">
-						{" "}
-						Darksky
-					</a>
+					<div className="route-container">
+						<LocationContainer
+							locations={this.state.routePoints}
+							isVisible={this.state.showLocations}
+						/>
+					</div>
+					<div className="footer">
+						© Jackson Kurtz. All rights reserved. Powered by
+						<a href="https://developer.tomtom.com" target="_blank">
+							TomTom
+						</a>{" "}
+						and
+						<a href="https://developer.tomtom.com" target="_blank">
+							{" "}
+							Darksky
+						</a>
+					</div>
 				</div>
 			</div>
 		);
