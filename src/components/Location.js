@@ -4,7 +4,7 @@ import "./Location.scss";
 const imgPath = process.env.PUBLIC_URL + "/assets/";
 
 const imageKey = {
-	"clear-day": "clear-day.jpeg",
+	"clear-day": "clear-day.jpg",
 	"clear-night": "clear-night.jpg",
 	"partly-cloudy-day": "partly-cloudy-day.jpg",
 	"partly-cloudy-night": "partly-cloudy-night.jpg",
@@ -21,13 +21,19 @@ const locationConfig = location => {
 			timeClass: "start",
 			timeLabel: "Leaving time",
 			nodeClass: "end",
-			distanceLabel: <h3>Start</h3>
+			distanceLabel: <h3>Start</h3>,
+			timeBubbleStyle: {
+				backgroundImage: `url(${imgPath}green-bubble.jpg)`
+			}
 		},
 		stop: {
 			timeClass: "",
 			timeLabel: "Estimated time",
 			nodeClass: "",
-			distanceLabel: <h3>{location.distance} mi</h3>
+			distanceLabel: <h3>{location.distance} mi</h3>,
+			timeBubbleStyle: {
+				backgroundImage: `url(${imgPath}gray-bubble.jpg)`
+			}
 		},
 		end: {
 			timeClass: "end",
@@ -38,24 +44,24 @@ const locationConfig = location => {
 					<h3>{location.distance} mi</h3>
 					<h3>Destination</h3>
 				</div>
-			)
+			),
+			timeBubbleStyle: {
+				backgroundImage: `url(${imgPath}red-bubble.jpg)`
+			}
 		}
 	};
 };
 
 const Location = ({ location, nodeType }) => {
-	console.log(location.location);
-	const { timeClass, timeLabel, nodeClass, distanceLabel } = locationConfig(location)[
-		nodeType
-	];
+	const { timeClass, timeLabel, nodeClass, distanceLabel, timeBubbleStyle } = locationConfig(
+		location
+	)[nodeType];
 	const locationStyle = {
-		//width: "100%",
-		//height: "auto",
-		backgroundSize: "120%",
 		backgroundImage: `url(${imgPath}${imageKey[location.icon] ||
 			"clear.jpeg"})`
 	};
 
+	console.log(timeBubbleStyle);
 	return (
 		<div className="row-container">
 			<div className={"distance-label " + nodeClass}>{distanceLabel}</div>
@@ -68,7 +74,7 @@ const Location = ({ location, nodeType }) => {
 					<h4 className="node-item">{location.summary}</h4>
 				</div>
 			</div>
-			<div className={"time-node " + timeClass}>
+			<div className={"time-node " + timeClass} style={timeBubbleStyle}>
 				<div className="time-container">
 					<h4 className="node-item">{timeLabel}</h4>
 					<h3 className="node-item">{location.time}</h3>

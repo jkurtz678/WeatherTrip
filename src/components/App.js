@@ -101,7 +101,7 @@ class App extends React.Component {
 							<h3>Weather conditions for the road ahead</h3>
 						</div>
 						<SearchForm onFormSubmit={this.onSearchSubmit} />
-						{/*<button onClick={this.onClickTwo}>Test</button>*/}
+						<button onClick={this.onClickTwo}>Test</button>
 						<ErrorMessage
 							className="error"
 							pose={this.state.showError ? "visible" : "hidden"}
