@@ -101,17 +101,17 @@ class App extends React.Component {
 							<h3>Weather conditions for the road ahead</h3>
 						</div>
 						<SearchForm onFormSubmit={this.onSearchSubmit} />
-						<button onClick={this.onClickTwo}>Test</button>
+						{/*<button onClick={this.onClickTwo}>Test</button>*/}
 						<ErrorMessage
 							className="error"
 							pose={this.state.showError ? "visible" : "hidden"}
 						>
 							Invalid route locations!
 						</ErrorMessage>
-						<div className={this.state.loading ? "" : "hidden"}>
+						<div className={ "progress-container " + (this.state.loading ? "" : "hidden")}>
 							<Loader
 								type="Puff"
-								color="#00BFFF"
+								color="white"
 								height={100}
 								width={100}
 							/>
